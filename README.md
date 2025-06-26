@@ -116,7 +116,11 @@ set :ssh_options, {
 server 'your_server_ip', roles: [:web, :app, :db], primary: true
 ```
 
-## Step 5: Deploy the App
+## Step 5: Deploy the App (server should be setup before running this command)
+
+Before running the deployment command, you need to have your server ready for deployment.  
+If you need help with setting up the server, use the guide:  
+[https://github.com/Tallalali1/deploy-rails-app-with-capistrano-and-passenger](https://github.com/Tallalali1/deploy-rails-app-with-capistrano-and-passenger)
 
 To deploy your application to the production server, run:
 
