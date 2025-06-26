@@ -180,6 +180,35 @@ production:
   password: your_secure_password
 ```
 
+**For Rails 8, use the following structure:**
+
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+
+production:
+  primary: &primary_production
+    <<: *default
+    database: your_production_database
+    username: a_new_user
+    password: your_secure_password
+  cache:
+    <<: *primary_production
+    database: your_production_cache
+    migrations_paths: db/cache_migrate
+  queue:
+    <<: *primary_production
+    database: your_production_queue
+    migrations_paths: db/queue_migrate
+  cable:
+    <<: *primary_production
+    database: your_production_cable
+    migrations_paths: db/cable_migrate
+```
+
 Finally, run the deployment command again:
 
 ```sh
