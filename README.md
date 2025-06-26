@@ -164,6 +164,22 @@ sudo nano database.yml
 
 Paste your `database.yml` content, save, and exit.
 
+Here is a sample `database.yml` for PostgreSQL:
+
+```yaml
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  host: localhost
+
+production:
+  <<: *default
+  database: your_production_database
+  username: a_new_user
+  password: your_secure_password
+```
+
 Finally, run the deployment command again:
 
 ```sh
