@@ -167,3 +167,26 @@ cap production deploy
 ```
 
 Your app should now be deployed
+
+## Optional: Enable Rails Logs Output to STDOUT
+
+To make it easier to view Rails logs on your server, you can add the following to your `config/environments/production.rb`:
+
+```ruby
+config.log_formatter = ::Logger::Formatter.new
+
+
+if ENV["RAILS_LOG_TO_STDOUT"].present?
+  logger = ActiveSupport::Logger.new($stdout)
+  logger.formatter = config.log_formatter
+  config.logger = ActiveSupport::TaggedLogging.new(logger)
+end
+```
+
+With this configuration, you can access your Rails logs by SSHing into your server, navigating to the log directory, and using the following commands:
+
+```sh
+cd yourappname/current/log
+tail -f production.log         # For real-time logs
+tail -n 200 production.log     # For the last 200
+```
